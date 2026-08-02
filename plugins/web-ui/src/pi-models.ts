@@ -1,7 +1,7 @@
 import { getModel } from "@earendil-works/pi-ai";
 import type { Api, Model } from "@earendil-works/pi-ai";
 
-const KNOWN_PROVIDERS = ["anthropic", "openai", "openrouter"] as const;
+const KNOWN_PROVIDERS = ["anthropic", "openai", "openrouter", "deepseek"] as const;
 
 const CLONE_TEMPLATES: Readonly<Record<string, { template: string; name: string }>> = {
   "claude-fable-5": { template: "claude-opus-4-8", name: "Claude Fable 5" },
@@ -32,6 +32,10 @@ export function getBaseModel(id: string, fallback?: { name: string; provider: st
   }
   if (fallback?.provider === "openrouter") {
     const template = getModel("openrouter", "openrouter/auto" as Parameters<typeof getModel>[1]) as PiModel | undefined;
+    if (template) return cloneModel(template, id, fallback.name);
+  }
+  if (fallback?.provider === "deepseek") {
+    const template = getModel("deepseek", "deepseek-v4-flash" as Parameters<typeof getModel>[1]) as PiModel | undefined;
     if (template) return cloneModel(template, id, fallback.name);
   }
   throw new Error(`Unsupported model: ${id}`);

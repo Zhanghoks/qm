@@ -49,6 +49,14 @@ const MODEL_CATALOG: Record<string, ModelMeta> = {
     label: "GPT-5.6 Luna",
     buttonLabel: "5.6 Luna",
   },
+  "deepseek-v4-flash": {
+    label: "DeepSeek V4 Flash",
+    buttonLabel: "V4 Flash",
+  },
+  "deepseek-v4-pro": {
+    label: "DeepSeek V4 Pro",
+    buttonLabel: "V4 Pro",
+  },
 };
 
 const DEFAULT_PICKER_MODEL_IDS: readonly string[] = [
